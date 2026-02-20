@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ACCESS TERMINAL</title>
+
+<style>
+body{
+background:black;
+color:lime;
+font-family:monospace;
+text-align:center;
+margin-top:20%;
+}
+
+input{
+padding:8px;
+background:black;
+color:lime;
+border:1px solid lime;
+}
+
+button{
+padding:8px 15px;
+background:lime;
+border:none;
+cursor:pointer;
+}
+
+#msg{
+margin-top:20px;
+color:red;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>RESTORE PROTOCOL ACCESS</h2>
+
+<p>ENTER CODE:</p>
+
+<input type="password" id="codeInput">
+<button onclick="checkCode()">ENTER</button>
+
+<p id="msg"></p>
+
+<p style="color:black;">hint: coordinates matter</p>
+
+<script>
+
+function checkCode(){
+
+var code = document.getElementById("codeInput").value;
+
+if(code === "18364"){
+window.location.href = "restore.html";
+}
+else{
+document.getElementById("msg").innerText = "ACCESS DENIED";
+glitch();
+}
+
+}
+
+function glitch(){
+document.body.style.background="white";
+setTimeout(function(){
+document.body.style.background="black";
+},200);
+}
+
+</script>
+
+</body>
+</html>
