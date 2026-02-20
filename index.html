@@ -2,30 +2,105 @@
 <html>
 <head>
 <title>Project 183</title>
+
 <style>
 body{
 background:black;
 color:lime;
 font-family:monospace;
-text-align:center;
-margin-top:20%;
+text-align:left;
+padding:40px;
+overflow:hidden;
 }
+
+#console{
+white-space:pre-line;
+}
+
 button{
-padding:10px 20px;
+padding:8px 15px;
 background:lime;
 border:none;
 cursor:pointer;
+margin-top:20px;
+}
+
+.flash{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:white;
+display:none;
+}
+
+.hidden{
+color:black;
 }
 </style>
 </head>
+
 <body>
 
-<h1>MINECRAFT 0.0.183_DEV</h1>
-<p>Build Status: STABLE</p>
+<div class="flash" id="flash"></div>
+
+<div id="console"></div>
 
 <button onclick="location.href='build183.zip'">
 Download Build
 </button>
+
+<p class="hidden">183 64 -183</p>
+
+<script>
+
+let lines = [
+"Booting Minecraft 0.0.183_DEV...",
+"Loading world data...",
+"Restoring chunks...",
+"Chunk restore failed.",
+"Scanning entity list...",
+"Entity_183 detected.",
+"Attempting removal...",
+"Removal failed.",
+"Build status: UNSTABLE"
+];
+
+let i = 0;
+let consoleDiv = document.getElementById("console");
+
+function typeLine(){
+if(i < lines.length){
+consoleDiv.innerHTML += lines[i] + "\\n";
+i++;
+setTimeout(typeLine, 1200);
+}else{
+triggerEvent();
+}
+}
+
+function triggerEvent(){
+
+// flash screen
+let flash = document.getElementById("flash");
+flash.style.display = "block";
+
+setTimeout(function(){
+flash.style.display = "none";
+consoleDiv.innerHTML += "\\nCONNECTION LOST.";
+},500);
+
+// redirect after delay
+setTimeout(function(){
+window.location.href = "access.html";
+},15000);
+
+}
+
+typeLine();
+
+</script>
 
 </body>
 </html>
