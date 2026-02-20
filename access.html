@@ -10,6 +10,7 @@ color:lime;
 font-family:monospace;
 text-align:center;
 margin-top:20%;
+transition:0.2s;
 }
 
 input{
@@ -31,13 +32,11 @@ margin-top:20px;
 color:red;
 }
 </style>
-
 </head>
 
 <body>
 
 <h2>RESTORE PROTOCOL ACCESS</h2>
-
 <p>ENTER CODE:</p>
 
 <input type="password" id="codeInput">
@@ -45,29 +44,39 @@ color:red;
 
 <p id="msg"></p>
 
-<p style="color:black;">hint: coordinates matter</p>
-
 <script>
+
+let attempts = 0;
 
 function checkCode(){
 
-var code = document.getElementById("codeInput").value;
+let code = document.getElementById("codeInput").value;
 
 if(code === "18364"){
 window.location.href = "restore.html";
 }
 else{
+attempts++;
 document.getElementById("msg").innerText = "ACCESS DENIED";
-glitch();
+
+glitchEffect();
+
+if(attempts === 2){
+document.getElementById("msg").innerText = "UNAUTHORIZED ACCESS DETECTED";
+}
+
+if(attempts >= 3){
+window.location.href = "error.html";
+}
 }
 
 }
 
-function glitch(){
+function glitchEffect(){
 document.body.style.background="white";
 setTimeout(function(){
 document.body.style.background="black";
-},200);
+},150);
 }
 
 </script>
